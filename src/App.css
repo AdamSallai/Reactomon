@@ -43,5 +43,44 @@ header h1 {
   display: flex;
   justify-content: space-around;
   align-items: center;
+  flex-wrap: wrap;
+  position: relative;
+  transform: translate(-50%);
+  left:50%;
+}
+
+.pokemon-box {
+  width: 110px;
+  height: 110px;
+  background-color: rgb(221, 221, 221);
+  margin: 20px;
+  border: 2px black solid;
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
   flex-direction: column;
+  position: relative;
+  overflow:hidden;
+  padding: 20px;
+}
+
+.pokemon-box img {
+  position: absolute;
+  top: 0%;
+}
+
+.pokemon-name-box {
+  background-color: rgb(199, 199, 199);
+  width: 100%;
+  height: 40px;
+  font-size: 24px;
+  position: absolute;
+  text-align: center;
+  bottom: 0%;
+}
+
+h1.pokemon-type {
+  text-align: center;
+  margin: 10px;
 }

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Header from "./components/layout/Header";
 import PokemonList from "./components/PokemonList";
+import TypeList from "./components/TypeList";
 
 import "./App.css";
 
@@ -11,7 +12,6 @@ export class App extends Component {
       <Router>
         <div>
           <Header />
-          <div className="main">
             <Route
               exact
               path="/pokemons"
@@ -21,7 +21,15 @@ export class App extends Component {
                 </React.Fragment>
               )}
             />
-          </div>
+            <Route
+              exact
+              path="/types"
+              render={(props) => (
+                <React.Fragment>
+                  <TypeList />
+                </React.Fragment>
+              )}
+            />
         </div>
       </Router>
     );
