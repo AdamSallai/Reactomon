@@ -16,20 +16,12 @@ export class App extends Component {
             <Route
               exact
               path="/pokemons"
-              render={(props) => (
-                <React.Fragment>
-                  <PokemonList />
-                </React.Fragment>
-              )}
+              component={PokemonList}
             />
             <Route
               exact
               path="/types"
-              render={(props) => (
-                <React.Fragment>
-                  <TypeList />
-                </React.Fragment>
-              )}
+              component={TypeList}
             />
             <Route
               exact

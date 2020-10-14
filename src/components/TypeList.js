@@ -1,21 +1,23 @@
-import React, { Component } from 'react';
-import axios from 'axios';
+import React, { Component } from "react";
+import axios from "axios";
 
 export class TypeList extends Component {
-  state = { results: []};
-  
+  state = { loading: true };
+
   componentDidMount() {
-    axios
-      .get("https://pokeapi.co/api/v2/type")
-      .then(res => {
-        this.setState({...res.data})
-      })
+    axios.get("https://pokeapi.co/api/v2/type").then((res) => {
+      this.setState({ loading: false, ...res.data });
+    });
   }
   render() {
-    return this.state.results.map((type) => (
-      <h1 className="pokemon-type">{type.name}</h1>
-    ))
+    if (this.state.loading) {
+      return <p></p>;
+    } else {
+      return this.state.results.map((type) => (
+        <h1 key={type.name} className="pokemon-type">{type.name}</h1>
+      ));
+    }
   }
 }
 
-export default TypeList
+export default TypeList;

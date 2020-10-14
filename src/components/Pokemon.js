@@ -4,32 +4,36 @@ import { Link } from "react-router-dom";
 
 export class Pokemon extends Component {
   state = {
-    name: "",
-    sprites: { front_default: "" },
+    loading: true
   };
 
   componentDidMount() {
     axios.get(this.props.pokemon.url).then((response) => {
-      this.setState(response.data);
+      this.setState({loading: false, ...response.data});
     });
-  };
+  }
 
   render() {
-    const pokemonURL = "/pokemon/"+this.state.id;
-
-    return (
-      <Link to={{
-        pathname: pokemonURL,
-        state: this.state
-        }}>
-        <div className="pokemon-box">
-          <img src={this.state.sprites.front_default} alt="" />
-          <div className="pokemon-name-box">
-            <p>{this.state.name}</p>
+    if (this.state.loading) {
+      return <p></p>;
+    } else {
+      const pokemonURL = "/pokemon/" + this.state.id;
+      return (
+        <Link
+          to={{
+            pathname: pokemonURL,
+            state: this.state,
+          }}
+        >
+          <div className="pokemon-box">
+            <img src={this.state.sprites.front_default} alt="" />
+            <div className="pokemon-name-box">
+              <p>{this.state.name}</p>
+            </div>
           </div>
-        </div>
-      </Link>
-    );
+        </Link>
+      );
+    }
   }
 }
 
