@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 export class Pokemon extends Component {
   state = {
@@ -14,13 +15,20 @@ export class Pokemon extends Component {
   };
 
   render() {
+    const pokemonURL = "/pokemon/"+this.state.id;
+
     return (
-      <div className="pokemon-box">
-        <img src={this.state.sprites.front_default} alt="" />
-        <div className="pokemon-name-box">
-          <p>{this.state.name}</p>
+      <Link to={{
+        pathname: pokemonURL,
+        state: this.state
+        }}>
+        <div className="pokemon-box">
+          <img src={this.state.sprites.front_default} alt="" />
+          <div className="pokemon-name-box">
+            <p>{this.state.name}</p>
+          </div>
         </div>
-      </div>
+      </Link>
     );
   }
 }

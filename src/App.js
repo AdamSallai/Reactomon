@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import Header from "./components/layout/Header";
 import PokemonList from "./components/PokemonList";
 import TypeList from "./components/TypeList";
+import PokemonDetail from "./components/PokemonDetail";
 
 import "./App.css";
 
@@ -29,6 +30,11 @@ export class App extends Component {
                   <TypeList />
                 </React.Fragment>
               )}
+            />
+            <Route
+              exact
+              path="/pokemon/:id"
+              component={PokemonDetail}
             />
         </div>
       </Router>

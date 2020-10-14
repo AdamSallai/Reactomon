@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export class TypeList extends Component {
   state = { results: []};
-
+  
   componentDidMount() {
     axios
       .get("https://pokeapi.co/api/v2/type")
