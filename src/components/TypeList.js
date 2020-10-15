@@ -1,22 +1,24 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-export class TypeList extends Component {
-  state = { loading: true };
+export const TypeList = () => {
+  const [isLoading, setIsLoading] = useState(true)
+  const [pokemons, setPokemons] = useState([])
 
-  componentDidMount() {
+  useEffect(() => {
     axios.get("https://pokeapi.co/api/v2/type").then((res) => {
-      this.setState({ loading: false, ...res.data });
+      setPokemons(res.data.results);
+      setIsLoading(false);
     });
-  }
-  render() {
-    if (this.state.loading) {
-      return <p></p>;
-    } else {
-      return this.state.results.map((type) => (
-        <h1 key={type.name} className="pokemon-type">{type.name}</h1>
-      ));
-    }
+  }, []);
+
+
+  if (isLoading) {
+    return <p></p>;
+  } else {
+    return pokemons.map((type) => (
+      <h1 key={type.name} className="pokemon-type">{type.name}</h1>
+    ));
   }
 }
 

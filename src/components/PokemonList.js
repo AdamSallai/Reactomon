@@ -1,34 +1,27 @@
-import React, { Component } from 'react'
-import axios from 'axios'
-import Pokemon from './Pokemon';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import Pokemon from "./Pokemon";
 
-export class PokemonList extends Component {
-  state = { 
-    loading: true
-  };
+export const PokemonList = () => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [pokemons, setPokemons] = useState([]);
 
-  componentDidMount() {
-    axios
-      .get("https://pokeapi.co/api/v2/pokemon")
-      .then(res => {
-        this.setState({loading: false, ...res.data})
-      })
-  }
 
-  render() {
-    if(this.state.loading){
-      return <p></p>
-    }else{
-      const pokemons = this.state.results.map(pokemon => (
-        <Pokemon key={pokemon.name} pokemon={pokemon}/>
-      ))
-      return (
-        <div className="main">
-          {pokemons}
-        </div>
-      )
-    }
+  useEffect(() => {
+    axios.get("https://pokeapi.co/api/v2/pokemon").then((res) => {
+      setPokemons(res.data.results);
+      setIsLoading(false);
+    });
+  },[])
+
+  if (isLoading) {
+    return <p></p>;
+  } else {
+    const allPokemons = pokemons.map((pokemon) => (
+      <Pokemon key={pokemon.name} pokemon={pokemon} />
+    ));
+    return <div className="main">{allPokemons}</div>;
   }
 }
 
-export default PokemonList
+export default PokemonList;

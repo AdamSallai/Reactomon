@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Header from "./components/layout/Header";
 import PokemonList from "./components/PokemonList";
@@ -7,31 +7,17 @@ import PokemonDetail from "./components/PokemonDetail";
 
 import "./App.css";
 
-export class App extends Component {
-  render() {
-    return (
-      <Router>
-        <div>
-          <Header />
-            <Route
-              exact
-              path="/pokemons"
-              component={PokemonList}
-            />
-            <Route
-              exact
-              path="/types"
-              component={TypeList}
-            />
-            <Route
-              exact
-              path="/pokemon/:id"
-              component={PokemonDetail}
-            />
-        </div>
-      </Router>
-    );
-  }
-}
+const App = () => {
+  return (
+    <Router>
+      <div>
+        <Header />
+        <Route exact path="/pokemons" component={PokemonList} />
+        <Route exact path="/types" component={TypeList} />
+        <Route exact path="/pokemon/:id" component={PokemonDetail} />
+      </div>
+    </Router>
+  );
+};
 
 export default App;

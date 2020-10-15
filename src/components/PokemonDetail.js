@@ -1,24 +1,19 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 
-export class PokemonDetail extends Component {
-  state = {
-    loading: true,
-    pokemon: {},
-  };
+const PokemonDetail = (props) => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [pokemon, setPokemon] = useState({});
 
-  componentDidMount() {
-    this.setState({
-      pokemon: this.props.location.state,
-      loading: false,
-    });
+  useEffect(() => {
+    setPokemon(props.location.state);
+    setIsLoading(false);
+  }, [props.location.state])
+
+  if (!isLoading){
+    return <div>{pokemon.name}</div>;
   }
-
-  render() {
-    if (!this.state.loading){
-      return <div>{this.state.pokemon.name}</div>;
-    }
-    return <div></div>
-  }
+  return <div></div>
+  
 }
 
 export default PokemonDetail;
