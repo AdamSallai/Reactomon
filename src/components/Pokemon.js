@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
 
 const Pokemon = (props) => {
   const [isLoading, setIsLoading] = useState(true);
   const [pokemon, setPokemon] = useState({});
-
 
   const getPokemon = () => {
     setIsLoading(true);
@@ -22,16 +22,48 @@ const Pokemon = (props) => {
   } else {
     const pokemonURL = "/pokemon/" + pokemon.id;
     return (
-      <Link to={{pathname: pokemonURL, state: pokemon}}>
-        <div className="pokemon-box">
+      <Link to={{ pathname: pokemonURL, state: pokemon }}>
+        <PokemonBox>
           <img src={pokemon.sprites.front_default} alt="" />
-          <div className="pokemon-name-box">
+          <PokemonNameBox>
             <p>{pokemon.name}</p>
-          </div>
-        </div>
+          </PokemonNameBox>
+        </PokemonBox>
       </Link>
     );
   }
 };
+
+const PokemonBox = styled.div`
+  width: 110px;
+  height: 110px;
+  background-color: rgb(221, 221, 221);
+  margin: 20px;
+  border: 2px black solid;
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  padding: 20px;
+  img {
+    position: absolute;
+    top: 0%;
+  }
+`;
+
+const PokemonNameBox = styled.div`
+  background-color: rgb(199, 199, 199);
+  width: 100%;
+  height: 40px;
+  font-size: 24px;
+  position: absolute;
+  text-align: center;
+  bottom: 0%;
+  color: black;
+`;
+
 
 export default Pokemon;

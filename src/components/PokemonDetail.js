@@ -11,7 +11,6 @@ const PokemonDetail = (props) => {
   }, [props.location.state]);
 
   if (!isLoading) {
-    const height = Math.max(3, Math.max(pokemon.types.length, pokemon.abilities.length)) * 80;
     return (
       <div style={{ height: "auto" }}>
         <H1>{pokemon.name}</H1>
@@ -19,7 +18,7 @@ const PokemonDetail = (props) => {
           <Img src={pokemon.sprites.front_default} alt="" />
           <Img src={pokemon.sprites.back_default} alt="" />
         </Box>
-        <FlexBox height={height}>
+        <FlexBox>
           <InformationBox>
             <p>Weight: {pokemon.weight}</p>
             <p>Height: {pokemon.height}</p>
@@ -84,7 +83,6 @@ const FlexBox = styled.div`
   justify-content: space-around;
   align-items: flex-start;
   position: relative;
-  height: ${props => props.height + "px"}
 `;
 
 const InformationBox = styled.div`
@@ -100,6 +98,7 @@ const InformationBox = styled.div`
   width: 100%;
   overflow-wrap: break-word;
   height: 100%;
+  min-width:200px;
 `;
 
 export default PokemonDetail;
