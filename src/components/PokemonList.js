@@ -20,7 +20,7 @@ export const PokemonList = () => {
     const allPokemons = pokemons.map((pokemon) => (
       <Pokemon key={pokemon.name} pokemon={pokemon} />
     ));
-    return <div className="main">{allPokemons}</div>;
+    return <div className="pokemons">{allPokemons}</div>;
   }
 }
 

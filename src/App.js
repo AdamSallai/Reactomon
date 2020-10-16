@@ -12,9 +12,11 @@ const App = () => {
     <Router>
       <div>
         <Header />
-        <Route exact path="/pokemons" component={PokemonList} />
-        <Route exact path="/types" component={TypeList} />
-        <Route exact path="/pokemon/:id" component={PokemonDetail} />
+        <div className="main">
+          <Route exact path="/pokemons" component={PokemonList} />
+          <Route exact path="/types" component={TypeList} />
+          <Route exact path="/pokemon/:id" component={PokemonDetail} />
+        </div>
       </div>
     </Router>
   );
