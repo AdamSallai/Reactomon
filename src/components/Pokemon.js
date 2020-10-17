@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { ThemeContext } from "../context/ThemeContext";
 
 const Pokemon = (props) => {
   const [isLoading, setIsLoading] = useState(true);
   const [pokemon, setPokemon] = useState({});
+  const [theme] = useContext(ThemeContext);
 
   const getPokemon = () => {
     setIsLoading(true);
@@ -23,9 +25,9 @@ const Pokemon = (props) => {
     const pokemonURL = "/pokemon/" + pokemon.id;
     return (
       <Link to={{ pathname: pokemonURL, state: pokemon }}>
-        <PokemonBox>
+        <PokemonBox theme={theme}>
           <img src={pokemon.sprites.front_default} alt="" />
-          <PokemonNameBox>
+          <PokemonNameBox theme={theme}>
             <p>{pokemon.name}</p>
           </PokemonNameBox>
         </PokemonBox>
@@ -35,9 +37,10 @@ const Pokemon = (props) => {
 };
 
 const PokemonBox = styled.div`
+  color: ${props => props.theme.textColor};
   width: 110px;
   height: 110px;
-  background-color: rgb(221, 221, 221);
+  background-color: ${props => props.theme.pokemonBoxColor};
   margin: 20px;
   border: 2px black solid;
   border-radius: 20px;
@@ -55,14 +58,14 @@ const PokemonBox = styled.div`
 `;
 
 const PokemonNameBox = styled.div`
-  background-color: rgb(199, 199, 199);
+  background-color: ${props => props.theme.cardNameColor};
+  border-top:1px black solid;
   width: 100%;
   height: 40px;
   font-size: 24px;
   position: absolute;
   text-align: center;
   bottom: 0%;
-  color: black;
 `;
 
 

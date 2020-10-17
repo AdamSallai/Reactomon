@@ -1,18 +1,26 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { ThemeContext } from "../../context/ThemeContext";
 
 export const Header = (props) => {
+  const [theme, setTheme] = useContext(ThemeContext);
+
+  const themeChanger = () => {
+    setTheme(theme.name === 'light' ? 'dark': 'light');
+  }
+
   return (
     <NavHeader>
-      <H1>Pokémon</H1>
-      <Nav className="links">
+      <H1>Reactomon</H1>
+      <Nav className="links" theme={theme}>
         <Link className="link" to="/pokemons">
           Pokemons
         </Link>
         <Link className="link" to="/types">
           Types
         </Link>
+        <p onClick={themeChanger}>Theme: {theme.name}</p>
       </Nav>
     </NavHeader>
   );
@@ -23,17 +31,18 @@ const Nav = styled.nav`
   justify-content: center;
   align-items: center;
   width: 100%;
-  background: rgb(1, 19, 63);
-  .link {
+  background-color: ${(props) => props.theme.navbarColor};
+  .link,
+  p {
+    cursor: pointer;
     text-decoration: none;
+    font-weight: bold;
     width: 300px;
     text-align: center;
     padding: 20px 50px;
-    background: rgb(1, 19, 63);
-    color: white;
-    font-size: 24px;
+    font-size: 28px;
     &:hover {
-      background: rgb(1, 24, 82);
+      background: ${(props) => props.theme.navbarHoverColor};
     }
   }
 `;
@@ -45,7 +54,7 @@ const NavHeader = styled.header`
 `;
 
 const H1 = styled.h1`
-  font-size: 48px;
+  font-size: 68px;
   margin: 50px;
 `;
 

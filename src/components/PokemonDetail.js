@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
+import { ThemeContext } from "../context/ThemeContext";
 
 const PokemonDetail = (props) => {
   const [isLoading, setIsLoading] = useState(true);
   const [pokemon, setPokemon] = useState({});
+  const [theme] = useContext(ThemeContext);
 
   useEffect(() => {
     setPokemon(props.location.state);
@@ -12,7 +14,7 @@ const PokemonDetail = (props) => {
 
   if (!isLoading) {
     return (
-      <div style={{ height: "auto" }}>
+      <Div theme={theme}>
         <H1>{pokemon.name}</H1>
         <Box>
           <Img src={pokemon.sprites.front_default} alt="" />
@@ -37,11 +39,15 @@ const PokemonDetail = (props) => {
             })}
           </InformationBox>
         </FlexBox>
-      </div>
+      </Div>
     );
   }
   return <div></div>;
 };
+
+const Div = styled.div`
+  background-color:${props => props.theme.mainColor};
+`
 
 const Img = styled.img`
   height: 300px;
@@ -55,7 +61,6 @@ const H1 = styled.h1`
   font-size: 48px;
   text-align: center;
   padding: 10px;
-  background: #ccc;
   width: 100%;
   border: 1px black solid;
   -webkit-box-sizing: border-box;
